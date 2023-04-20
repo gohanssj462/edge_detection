@@ -249,7 +249,7 @@ class ScanPresenter constructor(private val context: Context, private val iView:
         if (busy) {
             return
         }
-        Log.i(TAG, "on process start")
+        Log.i(TAG, "on process startt")
         busy = true
         try {
             Observable.just(p0)
