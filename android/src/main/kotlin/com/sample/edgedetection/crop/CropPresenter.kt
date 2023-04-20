@@ -28,7 +28,7 @@ import java.io.File
 import java.io.FileOutputStream
 
 
-const val IMAGES_DIR = "smart_scanner"
+const val IMAGES_DIR = "smart_scannerr"
 
 class CropPresenter(private val context: Context, private val iCropView: ICropView.Proxy) {
     private val picture: Mat? = SourceManager.pic
@@ -48,7 +48,7 @@ class CropPresenter(private val context: Context, private val iCropView: ICropVi
         iCropView.getPaper().setImageBitmap(bitmap)
     }
 
-    private fun addImageToGalleryOldApi(filePath: String, context: Context) {
+    /*private fun addImageToGalleryOldApi(filePath: String, context: Context) {
         if (Build.VERSION.SDK_INT > 28) {
             return
         }
@@ -88,7 +88,7 @@ class CropPresenter(private val context: Context, private val iCropView: ICropVi
         values.put(MediaStore.Images.Media.IS_PENDING, 0)
         // val uri = Uri.fromFile(File(fileUrl!!)!!)
         context.contentResolver.update(uri, values, null, null)
-    }
+    } commented by gohanssj462*/
 
     fun crop() {
         if (picture == null) {
@@ -191,7 +191,7 @@ class CropPresenter(private val context: Context, private val iCropView: ICropVi
         croppedBitmap = croppedBitmap?.rotateInt(rotateBitmapDegree)
     }
 
-    fun proceed(): String? {
+    /*fun proceed(): String? {
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             Toast.makeText(context, "please grant write file permission and trya gain", Toast.LENGTH_SHORT).show()
             return null
@@ -219,7 +219,7 @@ class CropPresenter(private val context: Context, private val iCropView: ICropVi
             return file.absolutePath
         }
         return null
-    }
+    } commented by gohanssj462 */
 
     fun save(): String? {
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -251,14 +251,15 @@ class CropPresenter(private val context: Context, private val iCropView: ICropVi
 
             val rotatePic = rotateBitmap
             if (null != rotatePic) {
-                addImageToGallery("rotate_${SystemClock.currentThreadTimeMillis()}.jpeg", rotateBitmap!!, this.context)
+               // addImageToGallery("rotate_${SystemClock.currentThreadTimeMillis()}.jpeg", rotateBitmap!!, this.context) commented by gohanssj462
                 val file = File(dir, "rotate_${SystemClock.currentThreadTimeMillis()}.jpeg")
                 val outStream = FileOutputStream(file)
                 rotatePic.compress(Bitmap.CompressFormat.JPEG, 100, outStream)
                 outStream.flush()
                 outStream.close()
                 rotatePic.recycle()
-                addImageToGalleryOldApi(file.absolutePath, context)
+
+                //addImageToGalleryOldApi(file.absolutePath, context) commented by gohanssj462
                 Log.i(TAG, "RotateBitmap Saved")
                 return file.absolutePath
                 //addImageToGallery(file.absolutePath, this.context) Commented as we don't want the images in the gallery.
@@ -268,14 +269,14 @@ class CropPresenter(private val context: Context, private val iCropView: ICropVi
                 val pic = enhancedPicture
 
                 if (null != pic) {
-                    addImageToGallery("enhance_${SystemClock.currentThreadTimeMillis()}.jpeg", enhancedPicture!!, this.context)
+                   // addImageToGallery("enhance_${SystemClock.currentThreadTimeMillis()}.jpeg", enhancedPicture!!, this.context) commented by gohanssj462
                     val file = File(dir, "enhance_${SystemClock.currentThreadTimeMillis()}.jpeg")
                     val outStream = FileOutputStream(file)
                     pic.compress(Bitmap.CompressFormat.JPEG, 100, outStream)
                     outStream.flush()
                     outStream.close()
                     pic.recycle()
-                    addImageToGalleryOldApi(file.absolutePath, context)
+                    //addImageToGalleryOldApi(file.absolutePath, context) commented by gohanssj462
                     Log.i(TAG, "EnhancedPicture Saved")
                     return file.absolutePath
                     //addImageToGallery(file.absolutePath, this.context) Commented as we don't want the images in the gallery.
@@ -283,14 +284,14 @@ class CropPresenter(private val context: Context, private val iCropView: ICropVi
                 } else {
                     val cropPic = croppedBitmap
                     if (null != cropPic) {
-                        addImageToGallery("crop_${SystemClock.currentThreadTimeMillis()}.jpeg", croppedBitmap!!, this.context)
+                      //  addImageToGallery("crop_${SystemClock.currentThreadTimeMillis()}.jpeg", croppedBitmap!!, this.context)commented by gohanssj462
                         val file = File(dir, "crop_${SystemClock.currentThreadTimeMillis()}.jpeg")
                         val outStream = FileOutputStream(file)
                         cropPic.compress(Bitmap.CompressFormat.JPEG, 100, outStream)
                         outStream.flush()
                         outStream.close()
                         cropPic.recycle()
-                        addImageToGalleryOldApi(file.absolutePath, context)
+                      //  addImageToGalleryOldApi(file.absolutePath, context) commented by gohanssj462
                         Log.i(TAG, "CroppedBitmap Saved")
                         return file.absolutePath
                         //addImageToGallery(file.absolutePath, this.context) Commented as we don't want the images in the gallery.
