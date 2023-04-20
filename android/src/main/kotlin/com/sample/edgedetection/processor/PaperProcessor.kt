@@ -131,6 +131,7 @@ private fun getCorners(contours: ArrayList<MatOfPoint>, size: Size): Corners? {
                 //return Corners(foundPoints, size)
                 
                 // The following line was added by gohanssj462 for testing
+                print("I am here!!!")
                 return null
             }
         } else {
